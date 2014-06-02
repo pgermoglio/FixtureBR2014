@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <title>Fixture BR2014</title>
-<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="themes/mundial-fifa-2014.min.css" />
 <link href="themes/jquery.mobile.icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="css/jquery.mobile.structure-1.4.2.min.css" rel="stylesheet" type="text/css"/>
 <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="js/custom-js.js" type="text/javascript"></script>
 <script src="js/jquery.mobile-1.4.2.min.js" type="text/javascript"></script>
 <script src="js/jquery-plugin-validation.min.js" type="text/javascript"></script>
 
@@ -74,9 +75,14 @@ function reloadme(){
 	checkConnection();
 	getmydata();
 	mostrarnoticias();
+	//setmail("");
 	setmailuser();
 	loadpronostico();
 	cargartodo();
+	mistamanosportada();
+	mistamanosiframe();
+	mistamanosimg();
+	mistamanosinnot();
 	}
 
 /*---------------------------------------------------*/
@@ -100,12 +106,11 @@ function reloadme(){
 	$.ajax({
 		url: 'http://www.bilaupaginasweb.com/fixturebr2014/php/GetData.php',
 		dataType: 'json',
-		timeout: 10000,
+		
 		success:function(datos, status){	
 			$.each(datos, function(i,item){				
 				miarray = (datos);
-				
-		});	
+			});	
 	for(var i = 0; i < miarray.length; i++){
 	if(miarray[i].tipo == 'comando'){
 		 maxnumcom = miarray[i].num;
@@ -139,6 +144,7 @@ for(var i = 0; i < miarray.length; i++){
 				localStorage.setItem('numnot', (variable + ""));
 			    var actualnot = 'actualnot' + miarray[i].num;
 	            localStorage.setItem(actualnot, (miarray[i].code));
+				
 
 	 }
 	}
@@ -159,8 +165,8 @@ for(var i = 0; i < miarray.length; i++){
 	
 	
 		},
-	error: function(datos,status){
-		alert(datos + "" + " " + status);
+	error: function(){
+		
 		$("#noticias .mismarcasabajo").css("display","block");
 		$( "#error-conex" ).popup( "open" );
 			}
@@ -212,6 +218,7 @@ for(var i = 0; i < miarray.length; i++){
 						
 						 var findme = aviso.indexOf(';');
 						 $('#innernoticia' + j).append(noticia);
+						 
 					   if(findme == (-1)){
 						   
 						      var x = j * 2
@@ -2613,7 +2620,7 @@ function onSuccess(data, status){
 /*               formulario                           */
 /*----------------------------------------------------*/
         function onError(data, status){
-            $( "#error-envio-form" ).popup( "open" );
+			$( "#error-envio-form" ).popup( "open" );
         }   
 		
 /*----------------------------------------------------*/
@@ -2814,7 +2821,7 @@ function refreshpron2(){
 			var formData = $("#formulario1").serialize();
             $.ajax({
                type: "POST",
-               url: "http://www.bilaupaginasweb.com/fixtureBr2014/php/PutData.php",
+               url: "http://www.bilaupaginasweb.com/fixturebr2014/php/PutData.php",
                cache: false,
                data: formData,
                success: onSuccess,
@@ -2830,7 +2837,7 @@ function refreshpron2(){
   
                 $.ajax({
                     type: "POST",
-                    url: "http://www.bilaupaginasweb.com/fixtureBr2014/php/InsData.php",
+                    url: "http://www.bilaupaginasweb.com/fixturebr2014/php/InsData.php",
                     cache: false,
                     data: formData,
                     success: onSuccessIns,
@@ -2846,7 +2853,7 @@ function refreshpron2(){
   
                 $.ajax({
                     type: "POST",
-                    url: "http://www.bilaupaginasweb.com/fixtureBr2014/php/InsData2.php",
+                    url: "http://www.bilaupaginasweb.com/fixturebr2014/php/InsData2.php",
                     cache: false,
                     data: formData,
                     success: onSuccessIns2,
@@ -2867,6 +2874,7 @@ function refreshpron2(){
         //var target = $(this).attr("id");
 		//var misrc = $(this).attr("src");
 		$('#iniciophoto .inter').attr('src', 'images/bilau-servicios.jpg');
+		mistamanospopportada();
 		$("#iniciophoto").popup("open");
 });
 
@@ -2875,6 +2883,7 @@ function refreshpron2(){
         var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#iniciophoto .inter').attr('src', misrc);
+		mistamanospop("#iniciophoto");
 		$("#iniciophoto").popup("open");
 });
 
@@ -2883,6 +2892,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#noticiasphoto .inter').attr('src', misrc);
+		mistamanospop("#noticiasphoto");
 		$("#noticiasphoto").popup("open");
    });
    
@@ -2891,6 +2901,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#gruposphoto .inter').attr('src', misrc);
+		mistamanospop("#gruposphoto");
 		$("#gruposphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2898,6 +2909,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#grupoaphoto .inter').attr('src', misrc);
+		mistamanospop("#grupoaphoto");
 		$("#grupoaphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2905,6 +2917,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#grupobphoto .inter').attr('src', misrc);
+		mistamanospop("#grupobphoto");
 		$("#grupobphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2912,6 +2925,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#grupocphoto .inter').attr('src', misrc);
+		mistamanospop("#grupocphoto");
 		$("#grupocphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2919,6 +2933,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#grupodphoto .inter').attr('src', misrc);
+		mistamanospop("#grupodphoto");
 		$("#grupodphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2926,6 +2941,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#grupoephoto .inter').attr('src', misrc);
+		mistamanospop("#grupoephoto");
 		$("#grupoephoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2933,6 +2949,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#grupofphoto .inter').attr('src', misrc);
+		mistamanospop("#grupofphoto");
 		$("#grupofphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2940,6 +2957,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#grupogphoto .inter').attr('src', misrc);
+		mistamanospop("#grupogphoto");
 		$("#grupogphoto").popup("open");
    });
    
@@ -2948,6 +2966,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#grupohphoto .inter').attr('src', misrc);
+		mistamanospop("#grupohphoto");
 		$("#grupohphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2955,6 +2974,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#octavosphoto .inter').attr('src', misrc);
+		mistamanospop("#octavosphoto");
 		$("#octavosphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2962,6 +2982,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#cuartosphoto .inter').attr('src', misrc);
+		mistamanospop("#cuartosphoto");
 		$("#cuartosphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2969,6 +2990,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#semiphoto .inter').attr('src', misrc);
+		mistamanospop("#semiphoto");
 		$("#semiphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2976,6 +2998,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#finalphoto .inter').attr('src', misrc);
+		mistamanospop("#finalphoto");
 		$("#finalphoto").popup("open");
    });
    /*----------------------------------------------------*/  
@@ -2983,6 +3006,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#formulariophoto .inter').attr('src', misrc);
+		mistamanospop("#formulariophoto");
 		$("#formulariophoto").popup("open");
    });
    
@@ -2991,6 +3015,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#pronosticophoto .inter').attr('src', misrc);
+		mistamanospop("#pronosticophoto");
 		$("#pronosticophoto").popup("open");
    });  
    /*----------------------------------------------------*/  
@@ -2998,6 +3023,7 @@ function refreshpron2(){
 		var target = $(this).attr("id");
 		var misrc = $("#" + target + " img").attr("src");
 		$('#mipronosticophoto .inter').attr('src', misrc);
+		mistamanospop("#mpronosticophoto");
 		$("#mipronosticophoto").popup("open");
    });  
 /*----------------------------------------------------*/
@@ -3437,6 +3463,67 @@ function setearmisvariables(a,b){
 		 localStorage.setItem(a,b);
 	  	}	
  /*----------------------------------------------------*/	
+ /*----------------------------------------------------*/		
+function mistamanosiframe(){
+	     var wtot= $(window).width();
+		 wtot = parseFloat(wtot);
+		 wtot = (wtot * 0.95);
+		 var miheight = ((wtot * 354)/450);
+		 $("#noticias iframe").css("height", miheight);
+		 $("#noticias iframe").css("width", wtot);
+		 	}	
+function mistamanosimg(){
+	     var wtot= $(window).width();
+		 wtot = parseFloat(wtot);
+		 wtot = (wtot * 0.93333333333333) /2;
+		 var miheight = ((wtot * 300)/400);
+		 $(".mismarcas img").css("height", miheight);
+		 $(".mismarcas img").css("width", wtot);
+		 $(".mismarcasabajo img").css("height", miheight);
+		 $(".mismarcasabajo img").css("width", wtot);
+		 	  	}	
+function mistamanosportada(){
+	     var wtot= $(window).width();
+		 wtot = parseFloat(wtot);
+		 wtot = (wtot * 0.95);
+		 var miheight = ((wtot * 537)/800);
+		 $("#portada").css("height", miheight);
+		 $("#portada").css("width", wtot);
+		  	}		
+function mistamanospopportada(){
+	     var wtot= $(window).width();
+		 wtot = parseFloat(wtot);
+		 wtot = (wtot * 0.93333333333333);
+		 var miheight = ((wtot * 1000)/800);
+		 $("#iniciophoto .inter").css("width", wtot);
+		 $("#iniciophoto .inter").css("height", miheight);
+		}					
+								
+function mistamanospop(a){
+	     var wtot= $(window).width();
+		 wtot = parseFloat(wtot);
+		 wtot = (wtot * 0.93333333333333);
+		 var miheight = ((wtot * 300)/400);
+		 $(a + " .inter").css("width", wtot);
+		 $(a + " .inter").css("height", miheight);
+		}		
+		
+function mistamanosinnot(){
+	     var wtot= $(window).width();
+		 wtot = parseFloat(wtot);
+		 wtot = (wtot * 0.95);
+		 $(".foto img").each(function () {
+			 var w = $(this).css("width"); 
+			 var h = $(this).css("height");
+			 w = parseFloat(w); 
+			 h = parseFloat(h);   
+			 var miheight = ((wtot * h)/w);
+			 $(this).css("width",wtot);
+			 $(this).css("height",miheight);
+		 });
+		}							
+ 
+/*----------------------------------------------------*/	
 	
 
 });	
@@ -3451,7 +3538,7 @@ div.ui-content.ui-body-a{
 	}
 #formulariopro2,#formulariopro3,#formulariopro4,#formulariopro5,#formulariopro6{
  display:none;	
-}
+} 
 
 #formulario1 li{
 	list-style-type: none;
@@ -3650,16 +3737,10 @@ ul.flags li p{
 @media (max-width: 240px) and (orientation: portrait)
 {
 iframe{
-	    width:100%;
-		height:100%;
-		max-width:240px;
-		min-height: 189px;
+	    
 		}	
 .foto img{
-	    width:100%;
-		height:100%;
-		/*width: 450px;
-		height: auto;*/
+	   
 		}
 .mifoot, .ui-title{
 	 font-size:12px !important;
@@ -3854,17 +3935,10 @@ margin-right: 0%;*/
 	 margin-top: 7px !important;
 	 }
 iframe{
-		/*width: 290px;
-		height: 228px;*/
-		width:100%;
-		height:100%;
-		min-height: 228px;
+		
 		}
 .foto img{
-	     width:100%;
-		height:100%;
-		 /*width: 290px;
-		 height: auto;*/
+	    
 		}
 
 .score.left.ui-li-count{
@@ -4048,16 +4122,10 @@ margin-right: 0%;*/
 @media (min-width: 321px) and (max-width: 480px) and (orientation: portrait)
 {
 iframe{
-	    width:100%;
-		height:100%;
-		/*width: 450px;*/
-		min-height: 354px;
+	    
 		}	
 .foto img{
-	    width:100%;
-		height:100%;
-		/*width: 450px;
-		height: auto;*/
+	   
 		}
 .misbotones{
 	width: 7.5em !important;
@@ -4221,21 +4289,15 @@ margin-left: 0;
  @media (min-width: 481px) and (orientation: portrait)
 {
 iframe{
-	    width:100%;
-		height:100%;
-		max-width:768px;
-		min-height:604px; 
+	    
 		}	
 .foto img{
-	    width:100%;
-		height:100%;
-		/*width: 450px;
-		height: auto;*/
+	    
 		}
 .misgrupos{
 	display:inline;
 	float:left;
-	width: 38% !important;
+	width: 35% !important;
 	
 }
 .misgrupos.impar{
@@ -4315,7 +4377,7 @@ ul.flags-mini li img.pronosticoizq{
 }		
 #formulariopro .ui-select.ui-btn-inline.ui-mini, #formulariopro6 .ui-select.ui-btn-inline.ui-mini, #mipronostico .ui-select.ui-btn-inline.ui-mini{
     /*margin-left: 6.5em;*/
-	margin-left:30%;
+	margin-left:25%;
 	}	
 ul.flags-mini li img.pronostico{
 	position:absolute;
@@ -4376,10 +4438,10 @@ ul.flags-mini li img.right{
     max-height:3.5em;
 		}
 .pushleft .ui-select.ui-btn-inline.ui-mini{	
-margin-left: 11%;
+margin-left: 8%;
 }
 .pushright .ui-select.ui-btn-inline.ui-mini{	
-    margin-left: 11%;
+    margin-right: 11%;
     margin-top: 0.5em;
 }
 .ui-radio input{
@@ -4426,7 +4488,7 @@ margin-left: 11%;
  
  <div data-role="content" data-theme="a">
     
-        <img id="portada" src="images/fixtureBR2014.jpg" width="100%" height="100%" style="margin-left:0%;">
+        <img id="portada" src="images/fixtureBR2014.jpg" width="100%" height="auto" style="margin-left:0%;">
     </div>   
     
     <div class="popcss ui-content" data-role="popup" id="error-conex" data-transition="flow">
@@ -4441,15 +4503,15 @@ margin-left: 11%;
 
 <div class="popimg ui-content" data-role="popup" id="iniciophoto" data-transition="flow">
     <a href="" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
+	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
 </div>
      
   <div class="mismarcasabajo" style="margin-top:-6% !important;" data-role="content" data-theme="a">   
-        <a id="inicioa0" class="imgaviso izq" href=""><img id="inicioi0" src="images/bilau-click.jpg" width="50%" height="50%" style="margin-left:0%;margin-right:0%;"></a><a id="inicioa1" class="imgaviso der" href=""><img id="inicioi1" src="images/rojo.jpg" width="50%" height="50%" style="margin-left:0%;margin-right:0%;"></a>
-        <a id="inicioa2" class="imgaviso izq" href=""><img id="inicioi2" src="" width="50%" height="50%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa3" class="imgaviso der" href=""><img id="inicioi3" src="" width="50%" height="50%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="inicioa4" class="imgaviso izq" href=""><img id="inicioi4" src="" width="50%" height="50%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa5" class="imgaviso der" href=""><img id="inicioi5" src="" width="50%" height="50%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="inicioa6" class="imgaviso izq" href=""><img id="inicioi6" src="" width="50%" height="50%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa7" class="imgaviso der" href=""><img id="inicioi7" src="" width="50%" height="50%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="inicioa8" class="imgaviso izq" href=""><img id="inicioi8" src="" width="50%" height="50%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa9" class="imgaviso der" href=""><img id="inicioi9" src="" width="50%" height="50%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+        <a id="inicioa0" class="imgaviso izq" href=""><img id="inicioi0" src="images/bilau-click.jpg" width="50%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="inicioa1" class="imgaviso der" href=""><img id="inicioi1" src="images/rojo.jpg" width="50%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="inicioa2" class="imgaviso izq" href=""><img id="inicioi2" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa3" class="imgaviso der" href=""><img id="inicioi3" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="inicioa4" class="imgaviso izq" href=""><img id="inicioi4" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa5" class="imgaviso der" href=""><img id="inicioi5" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="inicioa6" class="imgaviso izq" href=""><img id="inicioi6" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa7" class="imgaviso der" href=""><img id="inicioi7" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="inicioa8" class="imgaviso izq" href=""><img id="inicioi8" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa9" class="imgaviso der" href=""><img id="inicioi9" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
       </div>
       
     <div data-role="footer" data-position="fixed">
@@ -4482,45 +4544,45 @@ margin-left: 11%;
     </div>
     <div class="popimg ui-content" data-role="popup" id="noticiasphoto" data-transition="flow">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
+	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
 </div>
      
   <div class="mismarcas" style="margin-bottom:-10% !important;" data-role="content" data-theme="a">   
-        <a id="noticiasau0" class="imgaviso izq" href=""><img id="noticiasiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="noticiasau1" class="imgaviso der" href=""><img id="noticiasiu1" class="der" src="images/rojo.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="noticiasau0" class="imgaviso izq" href=""><img id="noticiasiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="noticiasau1" class="imgaviso der" href=""><img id="noticiasiu1" class="der" src="images/rojo.jpg" width="auto" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>
       
            
      <div class="noticia"  style="margin-top:-2% !important;" data-role="content" data-theme="a">
      
      <div class="innernoticias" id="innernoticia0"></div>
-    <a id="noticiasad0" class="imgaviso izq" href=""><img class="innernoticias" id="noticiasid0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="noticiasad1" class="imgaviso der" href=""><img id="noticiasid1" class="der" src="images/naranja.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad0" class="imgaviso izq" href=""><img class="innernoticias" id="noticiasid0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="noticiasad1" class="imgaviso der" href=""><img id="noticiasid1" class="der" src="images/naranja.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia1"></div>
-    <a id="noticiasad2" class="imgaviso izq" href=""><img id="noticiasid2" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad3" class="imgaviso der" href=""><img id="noticiasid3" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad2" class="imgaviso izq" href=""><img id="noticiasid2" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad3" class="imgaviso der" href=""><img id="noticiasid3" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia2"></div>
-    <a id="noticiasad4" class="imgaviso izq" href=""><img id="noticiasid4" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad5" class="imgaviso der" href=""><img id="noticiasid5" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad4" class="imgaviso izq" href=""><img id="noticiasid4" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad5" class="imgaviso der" href=""><img id="noticiasid5" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia3"></div>
-    <a id="noticiasad6" class="imgaviso izq" href=""><img id="noticiasid6" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad7" class="imgaviso der" href=""><img id="noticiasid7" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad6" class="imgaviso izq" href=""><img id="noticiasid6" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad7" class="imgaviso der" href=""><img id="noticiasid7" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia4"></div>
-    <a id="noticiasad8" class="imgaviso izq" href=""><img id="noticiasid8" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad9" class="imgaviso der" href=""><img id="noticiasid9" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad8" class="imgaviso izq" href=""><img id="noticiasid8" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad9" class="imgaviso der" href=""><img id="noticiasid9" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia5"></div>
-    <a id="noticiasad10" class="imgaviso izq" href=""><img id="noticiasid10" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad11" class="imgaviso der" href=""><img id="noticiasid11" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad10" class="imgaviso izq" href=""><img id="noticiasid10" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad11" class="imgaviso der" href=""><img id="noticiasid11" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia6"></div>
-    <a id="noticiasad12" class="imgaviso izq" href=""><img id="noticiasid12" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad13" class="imgaviso der" href=""><img id="noticiasid13" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad12" class="imgaviso izq" href=""><img id="noticiasid12" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad13" class="imgaviso der" href=""><img id="noticiasid13" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia7"></div>
-    <a id="noticiasad14" class="imgaviso izq" href=""><img id="noticiasid14" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad15" class="imgaviso der" href=""><img id="noticiasid15" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad14" class="imgaviso izq" href=""><img id="noticiasid14" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad15" class="imgaviso der" href=""><img id="noticiasid15" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia8"></div>
-    <a id="noticiasad16" class="imgaviso izq" href=""><img id="noticiasid16" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad17" class="imgaviso der" href=""><img id="noticiasid17" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="noticiasad16" class="imgaviso izq" href=""><img id="noticiasid16" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad17" class="imgaviso der" href=""><img id="noticiasid17" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
     
     <div class="innernoticias" id="innernoticia9"></div>
-    <a id="noticiasad18" class="imgaviso izq" href=""><img id="noticiasid18" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad19" class="imgaviso der" href=""><img id="noticiasid19" class="der" src="images/naranja.jpg" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="noticiasad18" class="imgaviso izq" href=""><img id="noticiasid18" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="noticiasad19" class="imgaviso der" href=""><img id="noticiasid19" class="der" src="images/naranja.jpg" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
       
     <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
@@ -4554,11 +4616,11 @@ margin-left: 11%;
  
   <div class="popimg ui-content" data-role="popup" id="gruposphoto" data-transition="flow">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
+	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="gruposau0" class="imgaviso izq" href=""><img id="gruposiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="gruposau1" class="imgaviso der" href=""><img id="gruposiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="gruposau0" class="imgaviso izq" href=""><img id="gruposiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="gruposau1" class="imgaviso der" href=""><img id="gruposiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>
 
 <div data-role="content">           
@@ -4581,10 +4643,10 @@ margin-left: 11%;
     
   </div>  
      <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="gruposad0" class="imgaviso izq" href=""><img id="gruposid0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="gruposad1" class="imgaviso der" href=""><img id="gruposid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="gruposad2" class="imgaviso izq" href=""><img id="gruposid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="gruposad3" class="imgaviso der" href=""><img id="gruposid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>    <a id="gruposad4" class="imgaviso izq" href=""><img id="gruposid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="gruposad5" class="imgaviso der" href=""><img id="gruposid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="gruposad6" class="imgaviso izq" href=""><img id="gruposid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="gruposad7" class="imgaviso der" href=""><img id="gruposid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="gruposad8" class="imgaviso izq" href=""><img id="gruposid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="gruposad9" class="imgaviso der" href=""><img id="gruposid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="gruposad0" class="imgaviso izq" href=""><img id="gruposid0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="gruposad1" class="imgaviso der" href=""><img id="gruposid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="gruposad2" class="imgaviso izq" href=""><img id="gruposid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="gruposad3" class="imgaviso der" href=""><img id="gruposid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>    <a id="gruposad4" class="imgaviso izq" href=""><img id="gruposid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="gruposad5" class="imgaviso der" href=""><img id="gruposid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="gruposad6" class="imgaviso izq" href=""><img id="gruposid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="gruposad7" class="imgaviso der" href=""><img id="gruposid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="gruposad8" class="imgaviso izq" href=""><img id="gruposid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="gruposad9" class="imgaviso der" href=""><img id="gruposid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
            
 
@@ -4619,11 +4681,11 @@ margin-left: 11%;
        
      <div class="popimg ui-content" data-role="popup" id="grupoaphoto" data-transition="flow">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
+	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="grupoaau0" class="imgaviso izq" href=""><img id="grupoaiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="grupoaau1" class="imgaviso der" href=""><img id="grupoaiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="grupoaau0" class="imgaviso izq" href=""><img id="grupoaiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupoaau1" class="imgaviso der" href=""><img id="grupoaiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>
       
        <div data-role="content">
@@ -4661,11 +4723,11 @@ margin-left: 11%;
  
 </div> 
  <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="grupoaad0" class="imgaviso izq" href=""><img id="grupoaid0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="grupoaad1" class="imgaviso der" href=""><img id="grupoaid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="grupoaad2" class="imgaviso izq" href=""><img id="grupoaid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoaad3" class="imgaviso der" href=""><img id="grupoaid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupoaad4" class="imgaviso izq" href=""><img id="grupoaid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoaad5" class="imgaviso der" href=""><img id="grupoaid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupoaad6" class="imgaviso izq" href=""><img id="grupoaid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoaad7" class="imgaviso der" href=""><img id="grupoaid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupoaad8" class="imgaviso izq" href=""><img id="grupoaid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoaad9" class="imgaviso der" href=""><img id="grupoaid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="grupoaad0" class="imgaviso izq" href=""><img id="grupoaid0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="grupoaad1" class="imgaviso der" href=""><img id="grupoaid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="grupoaad2" class="imgaviso izq" href=""><img id="grupoaid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoaad3" class="imgaviso der" href=""><img id="grupoaid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupoaad4" class="imgaviso izq" href=""><img id="grupoaid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoaad5" class="imgaviso der" href=""><img id="grupoaid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupoaad6" class="imgaviso izq" href=""><img id="grupoaid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoaad7" class="imgaviso der" href=""><img id="grupoaid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupoaad8" class="imgaviso izq" href=""><img id="grupoaid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoaad9" class="imgaviso der" href=""><img id="grupoaid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
  
         <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
@@ -4700,11 +4762,11 @@ margin-left: 11%;
         
          <div class="popimg ui-content" data-role="popup" id="grupobphoto" data-transition="flow">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
+	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="grupobau0" class="imgaviso izq" href=""><img id="grupobiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="grupobau1" class="imgaviso der" href=""><img id="grupobiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="grupobau0" class="imgaviso izq" href=""><img id="grupobiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupobau1" class="imgaviso der" href=""><img id="grupobiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>
       
   <div data-role="content">
@@ -4742,11 +4804,11 @@ margin-left: 11%;
  
  </div>
  <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="grupobad0" class="imgaviso izq" href=""><img id="grupobid0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="grupobad1" class="imgaviso der" href=""><img id="grupobid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="grupobad2" class="imgaviso izq" href=""><img id="grupobid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupobad3" class="imgaviso der" href=""><img id="grupobid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupobad4" class="imgaviso izq" href=""><img id="grupobid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupobad5" class="imgaviso der" href=""><img id="grupobid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupobad6" class="imgaviso izq" href=""><img id="grupobid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupobad7" class="imgaviso der" href=""><img id="grupobid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupobad8" class="imgaviso izq" href=""><img id="grupobid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupobad9" class="imgaviso der" href=""><img id="grupobid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="grupobad0" class="imgaviso izq" href=""><img id="grupobid0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="grupobad1" class="imgaviso der" href=""><img id="grupobid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="grupobad2" class="imgaviso izq" href=""><img id="grupobid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupobad3" class="imgaviso der" href=""><img id="grupobid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupobad4" class="imgaviso izq" href=""><img id="grupobid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupobad5" class="imgaviso der" href=""><img id="grupobid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupobad6" class="imgaviso izq" href=""><img id="grupobid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupobad7" class="imgaviso der" href=""><img id="grupobid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupobad8" class="imgaviso izq" href=""><img id="grupobid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupobad9" class="imgaviso der" href=""><img id="grupobid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     
     </div>
     <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
@@ -4784,7 +4846,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="grupocau0" class="imgaviso izq" href=""><img id="grupociu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="grupocau1" class="imgaviso der" href=""><img id="grupociu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="grupocau0" class="imgaviso izq" href=""><img id="grupociu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupocau1" class="imgaviso der" href=""><img id="grupociu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>
       
       <div data-role="content">
@@ -4821,11 +4883,11 @@ margin-left: 11%;
   <a class="grupoh misgrupos ui-mini ui-btn ui-shadow ui-corner-all" href="#octavos"><h2>Octavos</h2></a>
  </div>
   <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="grupocad0" class="imgaviso izq" href=""><img id="grupocid0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="grupocad1" class="imgaviso der" href=""><img id="grupocid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="grupocad2" class="imgaviso izq" href=""><img id="grupocid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupocad3" class="imgaviso der" href=""><img id="grupocid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupocad4" class="imgaviso izq" href=""><img id="grupocid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupocad5" class="imgaviso der" href=""><img id="grupocid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupocad6" class="imgaviso izq" href=""><img id="grupocid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupocad7" class="imgaviso der" href=""><img id="grupocid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupocad8" class="imgaviso izq" href=""><img id="grupocid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupocad9" class="imgaviso der" href=""><img id="grupocid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="grupocad0" class="imgaviso izq" href=""><img id="grupocid0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="grupocad1" class="imgaviso der" href=""><img id="grupocid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="grupocad2" class="imgaviso izq" href=""><img id="grupocid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupocad3" class="imgaviso der" href=""><img id="grupocid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupocad4" class="imgaviso izq" href=""><img id="grupocid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupocad5" class="imgaviso der" href=""><img id="grupocid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupocad6" class="imgaviso izq" href=""><img id="grupocid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupocad7" class="imgaviso der" href=""><img id="grupocid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupocad8" class="imgaviso izq" href=""><img id="grupocid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupocad9" class="imgaviso der" href=""><img id="grupocid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
      
     </div>
     <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
@@ -4863,7 +4925,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="grupodau0" class="imgaviso izq" href=""><img id="grupodiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="grupodau1" class="imgaviso der" href=""><img id="grupodiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="grupodau0" class="imgaviso izq" href=""><img id="grupodiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupodau1" class="imgaviso der" href=""><img id="grupodiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>
       
      <div data-role="content">
@@ -4902,11 +4964,11 @@ margin-left: 11%;
     </div>
     
    <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="grupodad0" class="imgaviso izq" href=""><img id="grupodid0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="grupodad1" class="imgaviso der" href=""><img id="grupodid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="grupodad2" class="imgaviso izq" href=""><img id="grupodid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupodad3" class="imgaviso der" href=""><img id="grupodid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupodad4" class="imgaviso izq" href=""><img id="grupodid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupodad5" class="imgaviso der" href=""><img id="grupodid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupodad6" class="imgaviso izq" href=""><img id="grupodid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupodad7" class="imgaviso der" href=""><img id="grupodid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupodad8" class="imgaviso izq" href=""><img id="grupodid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupodad9" class="imgaviso der" href=""><img id="grupodid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="grupodad0" class="imgaviso izq" href=""><img id="grupodid0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="grupodad1" class="imgaviso der" href=""><img id="grupodid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="grupodad2" class="imgaviso izq" href=""><img id="grupodid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupodad3" class="imgaviso der" href=""><img id="grupodid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupodad4" class="imgaviso izq" href=""><img id="grupodid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupodad5" class="imgaviso der" href=""><img id="grupodid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupodad6" class="imgaviso izq" href=""><img id="grupodid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupodad7" class="imgaviso der" href=""><img id="grupodid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupodad8" class="imgaviso izq" href=""><img id="grupodid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupodad9" class="imgaviso der" href=""><img id="grupodid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
     
     <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
@@ -4944,7 +5006,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="grupoeau0" class="imgaviso izq" href=""><img id="grupoeiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="grupoeau1" class="imgaviso der" href=""><img id="grupoeiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="grupoeau0" class="imgaviso izq" href=""><img id="grupoeiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupoeau1" class="imgaviso der" href=""><img id="grupoeiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>   
       
     <div data-role="content">   
@@ -4983,11 +5045,11 @@ margin-left: 11%;
  
    </div> 
     <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="grupoead0" class="imgaviso izq" href=""><img id="grupoeid0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="grupoead1" class="imgaviso der" href=""><img id="grupoeid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="grupoead2" class="imgaviso izq" href=""><img id="grupoeid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoead3" class="imgaviso der" href=""><img id="grupoeid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupoead4" class="imgaviso izq" href=""><img id="grupoeid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoead5" class="imgaviso der" href=""><img id="grupoeid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupoead6" class="imgaviso izq" href=""><img id="grupoeid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoead7" class="imgaviso der" href=""><img id="grupoeid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupoead8" class="imgaviso izq" href=""><img id="grupoeid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoead9" class="imgaviso der" href=""><img id="grupoeid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="grupoead0" class="imgaviso izq" href=""><img id="grupoeid0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="grupoead1" class="imgaviso der" href=""><img id="grupoeid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="grupoead2" class="imgaviso izq" href=""><img id="grupoeid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoead3" class="imgaviso der" href=""><img id="grupoeid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupoead4" class="imgaviso izq" href=""><img id="grupoeid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoead5" class="imgaviso der" href=""><img id="grupoeid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupoead6" class="imgaviso izq" href=""><img id="grupoeid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoead7" class="imgaviso der" href=""><img id="grupoeid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupoead8" class="imgaviso izq" href=""><img id="grupoeid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupoead9" class="imgaviso der" href=""><img id="grupoeid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
  
     <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
@@ -5024,11 +5086,11 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="grupofau0" class="imgaviso izq" href=""><img id="grupofiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="grupofau1" class="imgaviso der" href=""><img id="grupofiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-        <a id="grupofau2" class="imgaviso izq" href=""><img id="grupofiu2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau3" class="imgaviso der" href=""><img id="grupofiu3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="grupofau4" class="imgaviso izq" href=""><img id="grupofiu4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau5" class="imgaviso der" href=""><img id="grupofiu5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="grupofau6" class="imgaviso izq" href=""><img id="grupofiu6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau7" class="imgaviso der" href=""><img id="grupofiu7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="grupofau8" class="imgaviso izq" href=""><img id="grupofiu8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau9" class="imgaviso der" href=""><img id="grupofiu9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+        <a id="grupofau0" class="imgaviso izq" href=""><img id="grupofiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupofau1" class="imgaviso der" href=""><img id="grupofiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="grupofau2" class="imgaviso izq" href=""><img id="grupofiu2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau3" class="imgaviso der" href=""><img id="grupofiu3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="grupofau4" class="imgaviso izq" href=""><img id="grupofiu4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau5" class="imgaviso der" href=""><img id="grupofiu5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="grupofau6" class="imgaviso izq" href=""><img id="grupofiu6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau7" class="imgaviso der" href=""><img id="grupofiu7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="grupofau8" class="imgaviso izq" href=""><img id="grupofiu8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau9" class="imgaviso der" href=""><img id="grupofiu9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
       </div>      
    <div data-role="content">
     
@@ -5065,7 +5127,7 @@ margin-left: 11%;
 </div>
  
      <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a class="imgaviso izq" href=""><img class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a class="imgaviso der" href=""><img class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+    <a class="imgaviso izq" href=""><img class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a class="imgaviso der" href=""><img class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
     </div>
  
     
@@ -5103,7 +5165,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="grupogau0" class="imgaviso izq" href=""><img id="grupogiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="grupogau1" class="imgaviso der" href=""><img id="grupogiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="grupogau0" class="imgaviso izq" href=""><img id="grupogiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupogau1" class="imgaviso der" href=""><img id="grupogiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
              </div>      
  
  <div data-role="content">
@@ -5141,11 +5203,11 @@ margin-left: 11%;
  
  </div>
       <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="grupogad0" class="imgaviso izq" href=""><img id="grupogid0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="grupogad1" class="imgaviso der" href=""><img id="grupogid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="grupogad2" class="imgaviso izq" href=""><img id="grupogid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupogad3" class="imgaviso der" href=""><img id="grupogid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="grupogad4" class="imgaviso izq" href=""><img id="grupogid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupogad5" class="imgaviso der" href=""><img id="grupogid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="grupogad6" class="imgaviso izq" href=""><img id="grupogid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupogad7" class="imgaviso der" href=""><img id="grupogid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="grupogad8" class="imgaviso izq" href=""><img id="grupogid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupogad9" class="imgaviso der" href=""><img id="grupogid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="grupogad0" class="imgaviso izq" href=""><img id="grupogid0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="grupogad1" class="imgaviso der" href=""><img id="grupogid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="grupogad2" class="imgaviso izq" href=""><img id="grupogid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupogad3" class="imgaviso der" href=""><img id="grupogid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="grupogad4" class="imgaviso izq" href=""><img id="grupogid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupogad5" class="imgaviso der" href=""><img id="grupogid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="grupogad6" class="imgaviso izq" href=""><img id="grupogid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupogad7" class="imgaviso der" href=""><img id="grupogid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+        <a id="grupogad8" class="imgaviso izq" href=""><img id="grupogid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupogad9" class="imgaviso der" href=""><img id="grupogid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
  
  
@@ -5184,7 +5246,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="grupohau0" class="imgaviso izq" href=""><img id="grupohiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="grupohau1" class="imgaviso der" href=""><img id="grupohiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="grupohau0" class="imgaviso izq" href=""><img id="grupohiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupohau1" class="imgaviso der" href=""><img id="grupohiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
         </div>      
       
  <div data-role="content">
@@ -5221,11 +5283,11 @@ margin-left: 11%;
   <a class="grupoh misgrupos ui-mini ui-btn ui-shadow ui-corner-all" href="#octavos"><h2>Octavos</h2></a>
  </div>
      <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="grupohad0" class="imgaviso izq" href=""><img id="grupohid0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="grupohad1" class="imgaviso der" href=""><img id="grupohid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="grupohad2" class="imgaviso izq" href=""><img id="grupohid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupohad3" class="imgaviso der" href=""><img id="grupohid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupohad4" class="imgaviso izq" href=""><img id="grupohid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupohad5" class="imgaviso der" href=""><img id="grupohid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupohad6" class="imgaviso izq" href=""><img id="grupohid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupohad7" class="imgaviso der" href=""><img id="grupohid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="grupohad8" class="imgaviso izq" href=""><img id="grupohid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupohad9" class="imgaviso der" href=""><img id="grupohid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="grupohad0" class="imgaviso izq" href=""><img id="grupohid0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="grupohad1" class="imgaviso der" href=""><img id="grupohid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="grupohad2" class="imgaviso izq" href=""><img id="grupohid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupohad3" class="imgaviso der" href=""><img id="grupohid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupohad4" class="imgaviso izq" href=""><img id="grupohid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupohad5" class="imgaviso der" href=""><img id="grupohid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupohad6" class="imgaviso izq" href=""><img id="grupohid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupohad7" class="imgaviso der" href=""><img id="grupohid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="grupohad8" class="imgaviso izq" href=""><img id="grupohid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="grupohad9" class="imgaviso der" href=""><img id="grupohid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
  
     
@@ -5264,7 +5326,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="octavosau0" class="imgaviso izq" href=""><img id="octavosiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="octavosau1" class="imgaviso der" href=""><img id="octavosiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="octavosau0" class="imgaviso izq" href=""><img id="octavosiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="octavosau1" class="imgaviso der" href=""><img id="octavosiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
   
   <div data-role="content">
@@ -5293,11 +5355,11 @@ margin-left: 11%;
   <a class="grupoh misgrupos ui-mini ui-btn ui-shadow ui-corner-all" href="#cuartos"><h2>Cuartos</h2></a>
   </div>
      <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="octavosad0" class="imgaviso izq" href=""><img id="octavosid0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="octavosad1" class="imgaviso der" href=""><img id="octavosid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="octavosad2" class="imgaviso izq" href=""><img id="octavosid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="octavosad3" class="imgaviso der" href=""><img id="octavosid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="octavosad4" class="imgaviso izq" href=""><img id="octavosid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="octavosad5" class="imgaviso der" href=""><img id="octavosid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="octavosad6" class="imgaviso izq" href=""><img id="octavosid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="octavosad7" class="imgaviso der" href=""><img id="octavosid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="octavosad8" class="imgaviso izq" href=""><img id="octavosid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="octavosad9" class="imgaviso der" href=""><img id="octavosid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="octavosad0" class="imgaviso izq" href=""><img id="octavosid0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="octavosad1" class="imgaviso der" href=""><img id="octavosid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="octavosad2" class="imgaviso izq" href=""><img id="octavosid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="octavosad3" class="imgaviso der" href=""><img id="octavosid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="octavosad4" class="imgaviso izq" href=""><img id="octavosid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="octavosad5" class="imgaviso der" href=""><img id="octavosid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="octavosad6" class="imgaviso izq" href=""><img id="octavosid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="octavosad7" class="imgaviso der" href=""><img id="octavosid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="octavosad8" class="imgaviso izq" href=""><img id="octavosid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="octavosad9" class="imgaviso der" href=""><img id="octavosid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
  
    
@@ -5336,7 +5398,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="cuartosau0" class="imgaviso izq" href=""><img id="cuartosiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="cuartosau1" class="imgaviso der" href=""><img id="cuartosiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="cuartosau0" class="imgaviso izq" href=""><img id="cuartosiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="cuartosau1" class="imgaviso der" href=""><img id="cuartosiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
            
  
@@ -5360,11 +5422,11 @@ margin-left: 11%;
 </div>
  
       <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="cuartosad0" class="imgaviso izq" href=""><img id="cuartosid0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="cuartosad1" class="imgaviso der" href=""><img id="cuartosid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="cuartosad2" class="imgaviso izq" href=""><img id="cuartosid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="cuartosad3" class="imgaviso der" href=""><img id="cuartosid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="cuartosad4" class="imgaviso izq" href=""><img id="cuartosid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="cuartosad5" class="imgaviso der" href=""><img id="cuartosid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="cuartosad6" class="imgaviso izq" href=""><img id="cuartosid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="cuartosad7" class="imgaviso der" href=""><img id="cuartosid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="cuartosad8" class="imgaviso izq" href=""><img id="cuartosid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="cuartosad9" class="imgaviso der" href=""><img id="cuartosid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="cuartosad0" class="imgaviso izq" href=""><img id="cuartosid0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="cuartosad1" class="imgaviso der" href=""><img id="cuartosid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="cuartosad2" class="imgaviso izq" href=""><img id="cuartosid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="cuartosad3" class="imgaviso der" href=""><img id="cuartosid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="cuartosad4" class="imgaviso izq" href=""><img id="cuartosid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="cuartosad5" class="imgaviso der" href=""><img id="cuartosid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="cuartosad6" class="imgaviso izq" href=""><img id="cuartosid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="cuartosad7" class="imgaviso der" href=""><img id="cuartosid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="cuartosad8" class="imgaviso izq" href=""><img id="cuartosid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="cuartosad9" class="imgaviso der" href=""><img id="cuartosid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
  
     
@@ -5402,7 +5464,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="semiau0" class="imgaviso izq" href=""><img id="semiiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="semiau1" class="imgaviso der" href=""><img id="semi1u1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="semiau0" class="imgaviso izq" href=""><img id="semiiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="semiau1" class="imgaviso der" href=""><img id="semi1u1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
  
  <div data-role="content">
@@ -5420,11 +5482,11 @@ margin-left: 11%;
   <a class="grupoh misgrupos ui-mini ui-btn ui-shadow ui-corner-all" href="#final"><h2>Finales</h2></a>
  </div>
        <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="semiad0" class="imgaviso izq" href=""><img id="semiid0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="semiad1" class="imgaviso der" href=""><img id="semiid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="semiad2" class="imgaviso izq" href=""><img id="semiid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="semiad3" class="imgaviso der" href=""><img id="semiid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="semiad4" class="imgaviso izq" href=""><img id="semiid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="semiad5" class="imgaviso der" href=""><img id="semiid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="semiad6" class="imgaviso izq" href=""><img id="semiid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="semiad7" class="imgaviso der" href=""><img id="semiid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="semiad8" class="imgaviso izq" href=""><img id="semiid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="semiad9" class="imgaviso der" href=""><img id="semiid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="semiad0" class="imgaviso izq" href=""><img id="semiid0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="semiad1" class="imgaviso der" href=""><img id="semiid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="semiad2" class="imgaviso izq" href=""><img id="semiid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="semiad3" class="imgaviso der" href=""><img id="semiid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="semiad4" class="imgaviso izq" href=""><img id="semiid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="semiad5" class="imgaviso der" href=""><img id="semiid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="semiad6" class="imgaviso izq" href=""><img id="semiid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="semiad7" class="imgaviso der" href=""><img id="semiid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="semiad8" class="imgaviso izq" href=""><img id="semiid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="semiad9" class="imgaviso der" href=""><img id="semiid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
  
     
@@ -5463,7 +5525,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="finalau0" class="imgaviso izq" href=""><img id="finaliu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="finalau1" class="imgaviso der" href=""><img id="finaliu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="finalau0" class="imgaviso izq" href=""><img id="finaliu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="finalau1" class="imgaviso der" href=""><img id="finaliu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>         
   
   <div data-role="content">
@@ -5482,11 +5544,11 @@ margin-left: 11%;
  
 </div> 
        <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="finalad0" class="imgaviso izq" href=""><img id="finalid0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="finalad1" class="imgaviso der" href=""><img id="finalid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="finalad2" class="imgaviso izq" href=""><img id="finalid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="finalad3" class="imgaviso der" href=""><img id="finalid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="finalad4" class="imgaviso izq" href=""><img id="finalid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="finalad5" class="imgaviso der" href=""><img id="finalid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="finalad6" class="imgaviso izq" href=""><img id="finalid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="finalad7" class="imgaviso der" href=""><img id="finalid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="finalad8" class="imgaviso izq" href=""><img id="finalid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="finalad9" class="imgaviso der" href=""><img id="finalid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="finalad0" class="imgaviso izq" href=""><img id="finalid0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="finalad1" class="imgaviso der" href=""><img id="finalid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="finalad2" class="imgaviso izq" href=""><img id="finalid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="finalad3" class="imgaviso der" href=""><img id="finalid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="finalad4" class="imgaviso izq" href=""><img id="finalid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="finalad5" class="imgaviso der" href=""><img id="finalid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="finalad6" class="imgaviso izq" href=""><img id="finalid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="finalad7" class="imgaviso der" href=""><img id="finalid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="finalad8" class="imgaviso izq" href=""><img id="finalid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="finalad9" class="imgaviso der" href=""><img id="finalid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
  
     
@@ -5526,7 +5588,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -5% !important;" data-role="content" data-theme="a">   
-        <a id="formularioau0" class="imgaviso izq" href=""><img id="formularioiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="formularioau1" class="imgaviso der" href=""><img id="formularioiu1" class="der" src="images/diseno-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="formularioau0" class="imgaviso izq" href=""><img id="formularioiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="formularioau1" class="imgaviso der" href=""><img id="formularioiu1" class="der" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div> 
       
        <div data-role="content">       
@@ -5647,18 +5709,18 @@ margin-left: 11%;
     <a href="" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<p>Error del servidor, intentelo más tarde</p>
     <p>Debes corregir los errores</p>
- </div>
+ </div></br>
 
   <button id="submitme" class="ui-btn ui-btn-inline ui-btn-corner-all ui-shadow">Enviar</button>
  </form>
  
  </div>
        <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="formularioad0" class="imgaviso izq" href=""><img id="formularioid0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="formularioad1" class="imgaviso der" href=""><img id="formularioid1" class="der" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="formularioad2" class="imgaviso izq" href=""><img id="formularioid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="formularioad3" class="imgaviso der" href=""><img id="formularioid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="formularioad4" class="imgaviso izq" href=""><img id="formularioid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="formularioad5" class="imgaviso der" href=""><img id="formularioid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="formularioad6" class="imgaviso izq" href=""><img id="formularioid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="formularioad7" class="imgaviso der" href=""><img id="formularioid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="formularioad8" class="imgaviso izq" href=""><img id="formularioid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="formularioad9" class="imgaviso der" href=""><img id="formularioid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="formularioad0" class="imgaviso izq" href=""><img id="formularioid0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="formularioad1" class="imgaviso der" href=""><img id="formularioid1" class="der" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="formularioad2" class="imgaviso izq" href=""><img id="formularioid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="formularioad3" class="imgaviso der" href=""><img id="formularioid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="formularioad4" class="imgaviso izq" href=""><img id="formularioid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="formularioad5" class="imgaviso der" href=""><img id="formularioid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="formularioad6" class="imgaviso izq" href=""><img id="formularioid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="formularioad7" class="imgaviso der" href=""><img id="formularioid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="formularioad8" class="imgaviso izq" href=""><img id="formularioid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="formularioad9" class="imgaviso der" href=""><img id="formularioid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
     
     <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
@@ -5698,7 +5760,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -5% !important;" data-role="content" data-theme="a">   
-        <a id="pronosticoau0" class="imgaviso izq" href=""><img id="pronosticoiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="pronosticoau1" class="imgaviso der" href=""><img id="pronosticoiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="pronosticoau0" class="imgaviso izq" href=""><img id="pronosticoiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="pronosticoau1" class="imgaviso der" href=""><img id="pronosticoiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
      <div data-role="content">
  
@@ -6311,11 +6373,11 @@ margin-left: 11%;
  
    </div>
          <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="pronosticoad0" class="imgaviso izq" href=""><img id="pronosticoid0" class="izq" src="images/bilau-click.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad1" class="imgaviso der" href=""><img id="pronosticoid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="pronosticoad2" class="imgaviso izq" href=""><img id="pronosticoid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad3" class="imgaviso der" href=""><img id="pronosticoid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="pronosticoad4" class="imgaviso izq" href=""><img id="pronosticoid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad5" class="imgaviso der" href=""><img id="pronosticoid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="pronosticoad6" class="imgaviso izq" href=""><img id="pronosticoid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad7" class="imgaviso der" href=""><img id="pronosticoid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="pronosticoad8" class="imgaviso izq" href=""><img id="pronosticoid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad9" class="imgaviso der" href=""><img id="pronosticoid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="pronosticoad0" class="imgaviso izq" href=""><img id="pronosticoid0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad1" class="imgaviso der" href=""><img id="pronosticoid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="pronosticoad2" class="imgaviso izq" href=""><img id="pronosticoid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad3" class="imgaviso der" href=""><img id="pronosticoid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="pronosticoad4" class="imgaviso izq" href=""><img id="pronosticoid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad5" class="imgaviso der" href=""><img id="pronosticoid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="pronosticoad6" class="imgaviso izq" href=""><img id="pronosticoid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad7" class="imgaviso der" href=""><img id="pronosticoid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="pronosticoad8" class="imgaviso izq" href=""><img id="pronosticoid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="pronosticoad9" class="imgaviso der" href=""><img id="pronosticoid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>
     <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
         <h1 class="mifoot">br2014@bilaupaginasweb.com</h1>
@@ -6352,7 +6414,7 @@ margin-left: 11%;
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
-        <a id="mipronosticoau0" class="imgaviso izq" href=""><img id="mipronosticoiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a><a id="mipronosticoau1" class="imgaviso der" href=""><img id="mipronosticoiu1" class="der" src="images/verde.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
+        <a id="mipronosticoau0" class="imgaviso izq" href=""><img id="mipronosticoiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="mipronosticoau1" class="imgaviso der" href=""><img id="mipronosticoiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>        
  
  <div data-role="content">
@@ -6377,11 +6439,11 @@ margin-left: 11%;
      </ul> 
    </div>  
         <div class="mismarcasabajo" style="margin-top:-2% !important;" data-role="content" data-theme="a">
-    <a id="mipronosticoad0" class="imgaviso izq" href=""><img id="mipronosticoid0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad1" class="imgaviso der" href=""><img id="mipronosticoid1" class="der" src="images/azul.jpg" width="49%" height="49%" style="margin-left:0%;margin-right:0%;"></a>
-    <a id="mipronosticoad2" class="imgaviso izq" href=""><img id="mipronosticoid2" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad3" class="imgaviso der" href=""><img id="mipronosticoid3" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="mipronosticoad4" class="imgaviso izq" href=""><img id="mipronosticoid4" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad5" class="imgaviso der" href=""><img id="mipronosticoid5" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="mipronosticoad6" class="imgaviso izq" href=""><img id="mipronosticoid6" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad7" class="imgaviso der" href=""><img id="mipronosticoid7" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a>
-    <a id="mipronosticoad8" class="imgaviso izq" href=""><img id="mipronosticoid8" class="izq" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad9" class="imgaviso der" href=""><img id="mipronosticoid9" class="der" src="" width="49%" height="49%" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+    <a id="mipronosticoad0" class="imgaviso izq" href=""><img id="mipronosticoid0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad1" class="imgaviso der" href=""><img id="mipronosticoid1" class="der" src="images/azul.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
+    <a id="mipronosticoad2" class="imgaviso izq" href=""><img id="mipronosticoid2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad3" class="imgaviso der" href=""><img id="mipronosticoid3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="mipronosticoad4" class="imgaviso izq" href=""><img id="mipronosticoid4" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad5" class="imgaviso der" href=""><img id="mipronosticoid5" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="mipronosticoad6" class="imgaviso izq" href=""><img id="mipronosticoid6" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad7" class="imgaviso der" href=""><img id="mipronosticoid7" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
+    <a id="mipronosticoad8" class="imgaviso izq" href=""><img id="mipronosticoid8" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a> <a id="mipronosticoad9" class="imgaviso der" href=""><img id="mipronosticoid9" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
     </div>  
 
     <div data-role="footer" data-position="fixed"><a class="back" href="#" data-role="button" data-icon="back" data-iconpos="notext">Atrás</a>
