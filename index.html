@@ -75,7 +75,9 @@ function reloadme(){
 	checkConnection();
 	getmydata();
 	mostrarnoticias();
-	//setmail("");
+//setmail("");
+//setpronostico("","","","");
+//resetmarcanoticia();
 	setmailuser();
 	loadpronostico();
 	cargartodo();
@@ -3475,13 +3477,31 @@ function mistamanosiframe(){
 function mistamanosimg(){
 	     var wtot= $(window).width();
 		 wtot = parseFloat(wtot);
-		 wtot = (wtot * 0.93333333333333) /2;
+		 if(wtot <= 240){
+		 wtot = (wtot * 0.93333333333333);
+		 wtot = wtot * 0.47;
+		 }
+		 if(wtot <= 320 && wtot >= 241){
+		 wtot = (wtot * 0.93333333333333);
+		 wtot = wtot * 0.485;
+		 }
+		 if(wtot <= 400 && wtot >= 321){
+		 wtot = (wtot * 0.93333333333333);
+		 wtot = wtot * 0.49;
+		 }
+		 if(wtot >= 480){
+		 wtot = (wtot * 0.93333333333333);
+		 wtot = wtot * 0.50;
+		 }
+		 //wtot = (wtot * 0.92) /2;
 		 var miheight = ((wtot * 300)/400);
 		 $(".mismarcas img").css("height", miheight);
 		 $(".mismarcas img").css("width", wtot);
+		 //$(".mismarcas").attr("margin","auto 0 !important");
 		 $(".mismarcasabajo img").css("height", miheight);
 		 $(".mismarcasabajo img").css("width", wtot);
 		 	  	}	
+				
 function mistamanosportada(){
 	     var wtot= $(window).width();
 		 wtot = parseFloat(wtot);
@@ -3803,7 +3823,8 @@ ul.flags-mini li img.pronosticoizq{
 	margin-top: 6% !important;
 	}	
 .misgrupos.envio{
-	margin-left: 32%;
+	width: 10.0em;
+	margin-left: 20%;
 	margin-bottom: -10% !important;
 	}		
 .mismarcasabajo{margin-top:-20% !important;}	
@@ -3918,17 +3939,14 @@ margin-right: 0%;*/
 	margin-left: 6% !important;
 	margin-top: 2% !important;
 }	
-.misgrupos.envio{
-	margin-left: 37%;
-	margin-bottom: -10% !important;
-	}
+
 #formulariopro6 .misgrupos.envio{
 	margin-left: 37%;
 	margin-bottom: 2% !important;
 	}	
 	
 }
-@media (min-width: 241px) and (max-width: 320px) and (orientation: portrait)
+@media (min-width: 241px) and (max-width: 399px) and (orientation: portrait)
 {
 .mifoot, .ui-title{
 	 font-size:12px !important;
@@ -3998,7 +4016,8 @@ ul.flags-mini li img.pronosticoizq{
 	margin-top: 6% !important;
 	}	
 .misgrupos.envio{
-	margin-left: 32%;
+	width: 12.0em;
+	margin-left: 20%!important;
 	margin-bottom: -10% !important;
 	}		
 .mismarcasabajo{margin-top:-20% !important;}
@@ -4110,16 +4129,13 @@ margin-right: 0%;*/
 	margin-left: 6% !important;
 	margin-top: 2% !important;
 }	
-.misgrupos.envio{
-	margin-left: 37%;
-	margin-bottom: -10% !important;
-	}
+
 #formulariopro6 .misgrupos.envio{
 	margin-left: 37%;
 	margin-bottom: 2% !important;
 	}	
 }
-@media (min-width: 321px) and (max-width: 480px) and (orientation: portrait)
+@media (min-width: 400px) and (max-width: 479px) and (orientation: portrait)
 {
 
 .ui-controlgroup-horizontal .ui-radio input {
@@ -4133,6 +4149,12 @@ iframe{
 .foto img{
 	   
 		}
+.misgrupos{
+	display:inline;
+	float:left;
+	width: 26.13% !important;
+	
+}		
 .misbotones{
 	width: 7.5em !important;
 	margin-left: 1.00em !important;
@@ -4148,7 +4170,8 @@ iframe{
 	}	
 
 .misgrupos.envio{
-	margin-left: 8.5em;
+	width: 14.0em !important;
+	margin-left: 28%;
 	}	
 .misgrupos.unico{
     margin-left: 28%;
@@ -4157,7 +4180,7 @@ iframe{
 .misgrupos{
 	display:inline;
 	float:left;
-	width: 11.2em !important;
+	/*width: 28% !important;*/
 	
 }
 .score.left.ui-li-count{
@@ -4292,7 +4315,8 @@ margin-left: 0;
 	margin-top:1.0em;
 	}	
  } 
- @media (min-width: 481px) and (orientation: portrait)
+ @media (min-width: 480px) and (max-width: 1600px) and (orientation: portrait)
+ 
 {
 iframe{
 	    
@@ -4303,7 +4327,7 @@ iframe{
 .misgrupos{
 	display:inline;
 	float:left;
-	width: 33% !important;
+	/*width: 33% !important;*/
 	
 }
 .misgrupos.impar{
@@ -4364,9 +4388,7 @@ ul.flags-mini li img.pronosticoizq{
 	top: 0.3em !important;
     left: 0.3em !important;	
 	}			
-.misgrupos.envio{
-	margin-left: 32%;
-	}	
+
 .misgrupos.unico{
     margin-left: 28%;
 	}
@@ -4396,9 +4418,7 @@ ul.flags-mini li img.pronostico{
 	margin: 1px auto 1px 4% !important;
 	color: #343434;
 		}	
-.prono {
-	width: 14.0em;
-		}
+
  .prono2, .prono3{
 	 width: 12.0em;
  }
@@ -4463,9 +4483,69 @@ margin-left: 8%;
 	max-width:8%;
 	margin-top:1.0em;
 	}
-	.impar.misgrupos.ui-mini.ui-btn.ui-shadow.ui-corner-all ,	.misgrupos.ui-mini.ui-btn.ui-shadow.ui-corner-all{width: 34% !important;}
+	/*.impar.misgrupos.ui-mini.ui-btn.ui-shadow.ui-corner-all ,	.misgrupos.ui-mini.ui-btn.ui-shadow.ui-corner-all{width: 34% !important;}
+*/
 }
-
+@media (min-width: 480px) and (max-width: 550px) and (orientation: portrait){
+	.misgrupos{
+	width: 29.87% !important;
+	}
+	.misgrupos.envio{
+	margin-left: 36%;
+	width: 14em !important;
+	}	
+	.prono {
+	width: 16em;
+		}
+	}
+@media (min-width: 551px) and (max-width: 650px) and (orientation: portrait){
+	.misgrupos{
+	width: 32.67% !important;
+	}
+	.misgrupos.envio{
+	margin-left: 34%;
+	width: 16em !important;
+	}	
+	.prono {
+	width: 18em;
+		}
+	}
+@media (min-width: 651px) and (max-width: 750px) and (orientation: portrait){
+	.misgrupos{
+	width: 34.53% !important;
+	}
+	.misgrupos.envio{
+	margin-left: 32%;
+	width: 18em !important;
+	}	
+	.prono {
+	width: 20em;
+		}
+	}
+@media (min-width: 751px) and (max-width: 850px) and (orientation: portrait){
+	.misgrupos{
+	width: 36.4% !important;
+	}
+	.misgrupos.envio{
+	margin-left: 30%;
+	width: 20em !important;
+	}	
+	.prono {
+	width: 22em;
+		}
+	}
+@media (min-width: 851px) and (orientation: portrait){
+	.misgrupos{
+	width: 38.27% !important;
+	}
+	.misgrupos.envio{
+	margin-left: 29%;
+	width: 22em !important;
+	}	
+	.prono {
+	width: 24em;
+		}
+	}
 </style>
 </head> 
 <body> 
@@ -4514,11 +4594,11 @@ margin-left: 8%;
 </div>
      
   <div class="mismarcasabajo" style="margin-top:-6% !important;" data-role="content" data-theme="a">   
-        <a id="inicioa0" class="imgaviso izq" href=""><img id="inicioi0" src="images/bilau-click.jpg" width="50%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="inicioa1" class="imgaviso der" href=""><img id="inicioi1" src="images/rojo.jpg" width="50%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
-        <a id="inicioa2" class="imgaviso izq" href=""><img id="inicioi2" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa3" class="imgaviso der" href=""><img id="inicioi3" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="inicioa4" class="imgaviso izq" href=""><img id="inicioi4" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa5" class="imgaviso der" href=""><img id="inicioi5" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="inicioa6" class="imgaviso izq" href=""><img id="inicioi6" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa7" class="imgaviso der" href=""><img id="inicioi7" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
-        <a id="inicioa8" class="imgaviso izq" href=""><img id="inicioi8" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="inicioa9" class="imgaviso der" href=""><img id="inicioi9" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a></br>
+        <a id="inicioa0" class="imgaviso izq" href=""><img id="inicioi0" src="images/bilau-click.jpg" width="50%" height="auto" style="margin-left:0%;margin-right:0.5%;"></a><a id="inicioa1" class="imgaviso der" href=""><img id="inicioi1" src="images/rojo.jpg" width="50%" height="auto" style="margin-left:0.5%;margin-right:0%;"></a>
+        <a id="inicioa2" class="imgaviso izq" href=""><img id="inicioi2" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0.5%;"></a><a id="inicioa3" class="imgaviso der" href=""><img id="inicioi3" src="" width="50%" height="auto" style="display:none;margin-left:0.5%;margin-right:0%;"></a>
+        <a id="inicioa4" class="imgaviso izq" href=""><img id="inicioi4" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0.5%;"></a><a id="inicioa5" class="imgaviso der" href=""><img id="inicioi5" src="" width="50%" height="auto" style="display:none;margin-left:0.5%;margin-right:0%;"></a>
+        <a id="inicioa6" class="imgaviso izq" href=""><img id="inicioi6" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0.5%;"></a><a id="inicioa7" class="imgaviso der" href=""><img id="inicioi7" src="" width="50%" height="auto" style="display:none;margin-left:0.5%;margin-right:0%;"></a>
+        <a id="inicioa8" class="imgaviso izq" href=""><img id="inicioi8" src="" width="50%" height="auto" style="display:none;margin-left:0%;margin-right:0.5%;"></a><a id="inicioa9" class="imgaviso der" href=""><img id="inicioi9" src="" width="50%" height="auto" style="display:none;margin-left:0.5%;margin-right:0%;"></a></br>
       </div>
       
     <div data-role="footer" data-position="fixed">
@@ -5771,13 +5851,13 @@ margin-left: 8%;
         <a id="pronosticoau0" class="imgaviso izq" href=""><img id="pronosticoiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="pronosticoau1" class="imgaviso der" href=""><img id="pronosticoiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
      <div data-role="content">
- 
+ <!--
     <label id = "milabel2"for="directo">Pronostico directo</label>
 <select name="directo" id="directo" data-role="slider" data-mini="true">
     <option value="off" >No</option>
     <option value="on" selected="on">Si</option>
 </select>
-
+-->
 <div class= "addpop"></div>
 <div data-role="popup" id="infopronostico" data-transition="flow" class="popcss ui-content">
     <a href="" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
