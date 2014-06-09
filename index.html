@@ -194,6 +194,7 @@ for(var i = 0; i < miarray.length; i++){
  
 	});
 	
+	
 
   }
 /*---------------------------------------------------*/	
@@ -201,8 +202,9 @@ for(var i = 0; i < miarray.length; i++){
   $(".reload").click(function(){
 	  checkConnection();
 	  if(conn == true){
-	  reloadme();
+		  reloadme();
 	  }
+		  
 	    });
 
 /*---------------------------------------------------*/	  
@@ -4609,6 +4611,11 @@ margin-left: 8%;
 	<p></p>
 </div>
 
+<div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>
+
 <div class="popimg ui-content" data-role="popup" id="iniciophoto" data-transition="flow">
     <a href="" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
@@ -4653,6 +4660,9 @@ margin-left: 8%;
     <div class="popimg ui-content" data-role="popup" id="noticiasphoto" data-transition="flow">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
+</div>
+
+<div id="noticiasreload" class="popcss reloadpop ui-content" data-role="popup" data-transition="flow"><a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><p></p>
 </div>
      
   <div class="mismarcas" style="margin-bottom:-10% !important;" data-role="content" data-theme="a">   
@@ -4726,6 +4736,11 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
 </div>
+  
+  <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="gruposau0" class="imgaviso izq" href=""><img id="gruposiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="gruposau1" class="imgaviso der" href=""><img id="gruposiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
@@ -4772,6 +4787,8 @@ margin-left: 8%;
         <h1>GRUPO A</h1>
         <a href="#panel-3" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="a" data-display="push">Panel</a><a href="" class="reload" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a"></a>
     </div>
+   
+    
     <div data-theme="a" data-role="panel" id="panel-3">
         <ul data-theme="a" data-role="listview">
             <li><a href="#inicio">Inicio</a></li>
@@ -4791,7 +4808,12 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+  
+  
+  <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>    
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="grupoaau0" class="imgaviso izq" href=""><img id="grupoaiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupoaau1" class="imgaviso der" href=""><img id="grupoaiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>
@@ -4853,6 +4875,7 @@ margin-left: 8%;
         <h1>GRUPO B</h1>
         <a href="#panel-4" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="a" data-display="push">Panel</a><a href="" class="reload" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a"></a>
     </div>
+    
     <div data-theme="a" data-role="panel" id="panel-4">
         <ul data-theme="a" data-role="listview">
             <li><a href="#inicio">Inicio</a></li>
@@ -4872,7 +4895,11 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="auto" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+ 
+ <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>    
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="grupobau0" class="imgaviso izq" href=""><img id="grupobiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupobau1" class="imgaviso der" href=""><img id="grupobiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>
@@ -4933,6 +4960,8 @@ margin-left: 8%;
         <h1>GRUPO C</h1>
         <a href="#panel-5" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="a" data-display="push">Panel</a><a href="" class="reload" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a"></a>
     </div>
+    
+    
     <div data-theme="a" data-role="panel" id="panel-5">
         <ul data-theme="a" data-role="listview">
             <li><a href="#inicio">Inicio</a></li>
@@ -4951,6 +4980,10 @@ margin-left: 8%;
            <div class="popimg ui-content" data-role="popup" id="grupocphoto" data-transition="flow">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
+</div>
+<div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
@@ -5011,6 +5044,8 @@ margin-left: 8%;
         <h1>GRUPO D</h1>
         <a href="#panel-6" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="a" data-display="push">Panel</a><a href="" class="reload" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a"></a>
     </div>
+    
+    
     <div data-theme="a" data-role="panel" id="panel-6">
         <ul data-theme="a" data-role="listview">
             <li><a href="#inicio">Inicio</a></li>
@@ -5030,6 +5065,10 @@ margin-left: 8%;
              <div class="popimg ui-content" data-role="popup" id="grupodphoto" data-transition="flow">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
+</div>
+<div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
 </div>
      
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
@@ -5112,7 +5151,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+ <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>    
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="grupoeau0" class="imgaviso izq" href=""><img id="grupoeiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupoeau1" class="imgaviso der" href=""><img id="grupoeiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>   
@@ -5192,7 +5234,11 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+  
+  <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>    
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="grupofau0" class="imgaviso izq" href=""><img id="grupofiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupofau1" class="imgaviso der" href=""><img id="grupofiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
         <a id="grupofau2" class="imgaviso izq" href=""><img id="grupofiu2" class="izq" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a><a id="grupofau3" class="imgaviso der" href=""><img id="grupofiu3" class="der" src="" width="49%" height="auto" style="display:none;margin-left:0%;margin-right:0%;"></a>
@@ -5271,7 +5317,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+   <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>   
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="grupogau0" class="imgaviso izq" href=""><img id="grupogiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupogau1" class="imgaviso der" href=""><img id="grupogiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
              </div>      
@@ -5352,7 +5401,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+  <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>    
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="grupohau0" class="imgaviso izq" href=""><img id="grupohiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="grupohau1" class="imgaviso der" href=""><img id="grupohiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
         </div>      
@@ -5432,7 +5484,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+    <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>  
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="octavosau0" class="imgaviso izq" href=""><img id="octavosiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="octavosau1" class="imgaviso der" href=""><img id="octavosiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
@@ -5504,7 +5559,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+   <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>   
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="cuartosau0" class="imgaviso izq" href=""><img id="cuartosiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="cuartosau1" class="imgaviso der" href=""><img id="cuartosiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
@@ -5570,7 +5628,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+   <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>   
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="semiau0" class="imgaviso izq" href=""><img id="semiiu0" class="izq" src="images/bilau-click.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="semiau1" class="imgaviso der" href=""><img id="semi1u1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
@@ -5631,7 +5692,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+     <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div> 
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="finalau0" class="imgaviso izq" href=""><img id="finaliu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="finalau1" class="imgaviso der" href=""><img id="finaliu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>         
@@ -5690,11 +5754,7 @@ margin-left: 8%;
     
    
        
-        <div class="popimg ui-content" data-role="popup" id="formulariophoto" data-transition="flow">
-    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
-</div>
-     
+        
   <div class="mismarcas" style="margin-bottom: -5% !important;" data-role="content" data-theme="a">   
         <a id="formularioau0" class="imgaviso izq" href=""><img id="formularioiu0" class="izq" src="images/marketing-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="formularioau1" class="imgaviso der" href=""><img id="formularioiu1" class="der" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div> 
@@ -5782,7 +5842,7 @@ margin-left: 8%;
        
     3- PLAZO DE PRONÓSTICO
     
-       a- La aplicación le permitirá realizar su pronóstico hasta el 11 de junio (un día antes del comienzo de la competencia).    
+       a- La aplicación le permitirá realizar su pronóstico hasta el final de la fase de grupos.   
 
 </textarea>
      
@@ -5791,6 +5851,15 @@ margin-left: 8%;
     <option value="" selected="">No</option>
     <option value="on" >Si</option>
 </select></br>
+
+<div class="popimg ui-content" data-role="popup" id="formulariophoto" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
+</div>
+     <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div> 
 
     <div data-role="popup" id="envio-form" data-transition="flow" class="popcss ui-content">
    	<p>Los datos fueron enviados en forma correcta, recibirá un email para activar su cuenta, ya puede realizar su pronóstico pero este tendrá validez una vez active la cuenta</p></br>
@@ -5867,7 +5936,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+  <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>    
   <div class="mismarcas" style="margin-bottom: -5% !important;" data-role="content" data-theme="a">   
         <a id="pronosticoau0" class="imgaviso izq" href=""><img id="pronosticoiu0" class="izq" src="images/celulares-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="pronosticoau1" class="imgaviso der" href=""><img id="pronosticoiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>      
@@ -6521,7 +6593,10 @@ margin-left: 8%;
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 	<img class="inter" src="" width="100%" height="100%" style="margin-left:0%;margin-right:0%;">
 </div>
-     
+    <div class="popcss reloadpop ui-content" data-role="popup" data-transition="flow">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<p></p>
+</div>  
   <div class="mismarcas" style="margin-bottom: -3% !important;" data-role="content" data-theme="a">   
         <a id="mipronosticoau0" class="imgaviso izq" href=""><img id="mipronosticoiu0" class="izq" src="images/diseno-bilau.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a><a id="mipronosticoau1" class="imgaviso der" href=""><img id="mipronosticoiu1" class="der" src="images/verde.jpg" width="49%" height="auto" style="margin-left:0%;margin-right:0%;"></a>
       </div>        
