@@ -12,9 +12,22 @@
 <script src="js/jquery.mobile-1.4.2.min.js" type="text/javascript"></script>
 <script src="js/jquery-plugin-validation.min.js" type="text/javascript"></script>
 
+<script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        navigator.splashscreen.hide();
+    }
+
+ </script>
 <script>
 $(document).ready(function(){
- $('a.back').click(function(){
+	$('a.back').click(function(){
         parent.history.back();
         return false;
     });
@@ -25,6 +38,7 @@ var maxnumcom = "0";
 var maxnummnt = "0";
 var descartenot = "0";
 var miarray = ("0","0");
+
 
 /*---------------------------------------------------*/
 /*  Cargar valor de varianle numnot si no existe = 0  */
@@ -62,6 +76,13 @@ var variable = localStorage.getItem('numnot');
 	     localStorage.setItem('numcom', variable4);
 		  }	  		  
 /*---------------------------------------------------*/		 reloadme();
+//localStorage.setItem('nummnt', "0");
+//localStorage.setItem('numnot', "0");
+//localStorage.setItem('numfix', "0");
+//localStorage.setItem('numcom', "0");
+//setmail("");
+//setpronostico("","","","");
+//resetmarcanoticia();
 /*----------------------------------------------------*/		
 /*----------------------------------------------------*/
 /*        FIN DE CARGA AL INICIO                      */
@@ -75,9 +96,6 @@ function reloadme(){
 	checkConnection();
 	getmydata();
 	mostrarnoticias();
-//setmail("");
-//setpronostico("","","","");
-//resetmarcanoticia();
 	setmailuser();
 	loadpronostico();
 	cargartodo();
@@ -181,7 +199,10 @@ for(var i = 0; i < miarray.length; i++){
 /*---------------------------------------------------*/	
 
   $(".reload").click(function(){
+	  checkConnection();
+	  if(conn == true){
 	  reloadme();
+	  }
 	    });
 
 /*---------------------------------------------------*/	  
